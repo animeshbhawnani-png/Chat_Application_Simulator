@@ -1,13 +1,12 @@
 ﻿# Chat_Application_Simulator
 
-VibeChat — Chat Application Simulator
-A local, browser-based chat application simulator built with Core Java, HTML, CSS, and vanilla JavaScript. Its Instagram-inspired purple–pink gradient interface provides a familiar direct-messaging experience, while the Java backend demonstrates fundamental Data Structures and Algorithms (DSA).
-Note: VibeChat is an educational, local-only simulator. It is not affiliated with Instagram and does not send messages over the internet.
-
-📄 Project Report & PPT Submission
+ 📄 Project Report & PPT Submission
 The project documentation and presentation are available through Google Drive:
 - Project Report & Presentation:https://drive.google.com/drive/folders/1GPxCMlihcKomJ6VsGWsHboxQweUtLQDG?usp=sharing 
 
+VibeChat — Chat Application Simulator
+A local, browser-based chat application simulator built with Core Java, HTML, CSS, and vanilla JavaScript. Its Instagram-inspired purple–pink gradient interface provides a familiar direct-messaging experience, while the Java backend demonstrates fundamental Data Structures and Algorithms (DSA).
+Note: VibeChat is an educational, local-only simulator. It is not affiliated with Instagram and does not send messages over the internet.
 
 Features
 - Register users with unique IDs and search for them.
