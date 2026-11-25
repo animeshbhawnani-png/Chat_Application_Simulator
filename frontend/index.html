@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>VibeChat · Chat Application Simulator</title>
+  <link rel="stylesheet" href="/style.css?v=2" />
+  <script src="/script.js?v=2" defer></script>
+</head>
+<body>
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5 8.2 8.2 0 0 1-3.2-.67L4 20l1.67-5.3A8.2 8.2 0 0 1 5 11.5a7.5 7.5 0 1 1 15 0Z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 1.7 6.3L20 10l-6.3 1.7L12 18l-1.7-6.3L4 10l6.3-1.7L12 2ZM19 17l.7 2.3L22 20l-2.3.7L19 23l-.7-2.3L16 20l2.3-.7L19 17Z"/></symbol>
+    <symbol id="i-userplus" viewBox="0 0 24 24"><path d="M15 19v-1.5A4.5 4.5 0 0 0 10.5 13h-4A4.5 4.5 0 0 0 2 17.5V19M8.5 9a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM19 8v8m-4-4h8"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m21 3-9.3 18-2.2-7.5L2 11.3 21 3ZM9.5 13.5 21 3"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></symbol>
+    <symbol id="i-arrowleft" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6M9 12h12"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+    <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M3 4h18l-1.5 15H4.5L3 4ZM3.5 14h5l1.5 2h4l1.5-2h5"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-5l-2 2m0-5v5h5M4 13a8 8 0 0 0 14 5l2-2m0 5v-5h-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5M4 9h9a7 7 0 0 1 0 14h-2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2H3ZM17 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 5v1h-3"/></symbol>
+  </svg>
+
+  <div class="app" id="app">
+    <nav class="rail" aria-label="App navigation">
+      <div class="rail-brand" title="VibeChat"><span class="brand-mark">V</span></div>
+      <div class="rail-actions">
+        <button type="button" class="rail-btn selected" id="navChats" aria-label="Chats" title="Chats"><svg class="icon"><use href="#i-chat"></use></svg></button>
+        <button type="button" class="rail-btn" id="navPeople" aria-label="Add a user" title="Add a user"><svg class="icon"><use href="#i-users"></use></svg></button>
+        <button type="button" class="rail-btn" id="navTools" aria-label="Chat actions" title="Chat actions"><svg class="icon"><use href="#i-grid"></use></svg></button>
+      </div>
+      <div class="rail-bottom"><span class="rail-avatar" id="railAvatar" title="Current active user">?</span></div>
+    </nav>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="wordmark">vibe<span>chat</span><span class="wordmark-dot">.</span></div>
+        <button class="icon-button new-user" type="button" id="newUserBtn" aria-label="Register new user" title="New user"><svg class="icon"><use href="#i-userplus"></use></svg></button>
+      </div>
+      <div class="active-user-box">
+        <label for="activeUser">CHATTING AS</label>
+        <div class="active-select-wrap"><span class="tiny-avatar" id="activeAvatar">?</span><select id="activeUser" aria-label="Select active user"><option value="">Choose a user</option></select><svg class="icon tiny"><use href="#i-chevron"></use></svg></div>
+      </div>
+      <div class="sidebar-title-row"><h1>Messages <span id="contactCount" class="count">0</span></h1><span class="tiny-label">DIRECT</span></div>
+      <div class="search-wrap"><svg class="icon"><use href="#i-search"></use></svg><input type="search" id="contactSearch" autocomplete="off" placeholder="Search people or user ID" aria-label="Search people"/><button type="button" id="exactSearch" title="Search exact user ID">Find ID</button></div>
+      <div class="contacts-topline"><span>CONVERSATIONS</span><button type="button" id="refreshUsers" class="text-button">Refresh</button></div>
+      <div id="contacts" class="contacts-list" aria-label="Registered users"><div class="sidebar-empty">Loading users...</div></div>
+      <div class="sidebar-footer"><span class="connection-dot" id="connectionDot"></span><span id="connectionText">Connecting...</span><span class="footer-dot">·</span> Local Java simulator</div>
+    </aside>
+
+    <main class="thread" id="thread">
+      <div class="thread-header">
+        <button type="button" class="icon-button back-button" id="backToChats" aria-label="Back to chats"><svg class="icon"><use href="#i-arrowleft"></use></svg></button>
+        <div class="header-avatar" id="chatAvatar">✦</div>
+        <div class="thread-header-copy"><strong id="chatName">Your messages</strong><span id="chatSubtitle">Choose a conversation to get started</span></div>
+        <div class="thread-actions">
+          <button type="button" class="header-action" id="refreshChat" title="Refresh conversation" aria-label="Refresh conversation"><svg class="icon"><use href="#i-refresh"></use></svg></button>
+          <button type="button" class="tools-button" id="toolsBtn"><svg class="icon"><use href="#i-grid"></use></svg><span>Actions</span><span class="pending-badge" id="pendingBadge">0</span></button>
+        </div>
+      </div>
+      <div class="messages-area" id="messagesArea">
+        <div class="welcome" id="welcome"><div class="welcome-logo"><svg class="icon"><use href="#i-chat"></use></svg></div><div class="eyebrow">YOU'RE ALL SET</div><h2>Your conversations,<br/><em>your vibe.</em></h2><p>Choose someone from the left to start chatting. This is your local Core Java messaging simulator.</p><button type="button" class="gradient-button" id="welcomeNewUser">+ Create a user</button></div>
+        <div class="messages-list" id="messagesList" aria-live="polite" aria-label="Chat history" hidden></div>
+      </div>
+      <form id="composeForm" class="composer" autocomplete="off">
+        <div class="composer-input-wrap"><textarea id="messageInput" aria-label="Type a message" placeholder="Your message..." rows="1" disabled></textarea><button type="submit" class="send-button" id="sendBtn" disabled title="Send message" aria-label="Send message"><svg class="icon"><use href="#i-send"></use></svg></button></div>
+        <div class="composer-hint"><span>Enter to send <span class="dot-separator">·</span> Shift + Enter for new line</span><span>Powered by <b>VibeChat</b></span></div>
+      </form>
+    </main>
+
+    <div class="drawer-shade" id="drawerShade" hidden></div>
+    <aside class="tools-drawer" id="toolsDrawer" aria-label="Chat actions" aria-hidden="true">
+      <div class="drawer-header"><div><span class="eyebrow">MANAGE YOUR CHATS</span><h2>Chat actions <span>✳</span></h2></div><button type="button" class="icon-button" id="closeTools" aria-label="Close tools"><svg class="icon"><use href="#i-x"></use></svg></button></div>
+      <div class="drawer-scroll">
+        <div class="info-note"><svg class="icon"><use href="#i-spark"></use></svg><p>Delivery and undo apply to <strong>all conversations</strong>, not only the chat currently open.</p></div>
+        <div class="tool-section-title"><h3>Pending messages</h3><span class="tool-pill" id="queueCount">0 pending</span></div>
+        <div class="queue-items" id="queueList"><div class="queue-empty">No messages waiting to be delivered.</div></div>
+        <div class="tool-buttons"><button type="button" class="gradient-button" id="deliverBtn"><svg class="icon"><use href="#i-send"></use></svg>Deliver next</button><button type="button" class="light-button" id="undoBtn"><svg class="icon"><use href="#i-undo"></use></svg>Undo last unsent</button></div>
+        <div class="section-divider"></div>
+        <div class="tool-section-title"><h3>Search messages</h3></div>
+        <form id="searchMessagesForm" class="tool-search"><input id="messageKeyword" type="search" placeholder="Search message text..." required/><button type="submit" aria-label="Search message text"><svg class="icon"><use href="#i-search"></use></svg></button></form>
+        <div class="search-results" id="searchResults"><p class="quiet">Search across all conversation history.</p></div>
+
+      </div>
+    </aside>
+
+    <div class="modal-backdrop" id="modalBackdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button type="button" class="icon-button modal-close" id="closeModal" aria-label="Close dialog"><svg class="icon"><use href="#i-x"></use></svg></button><div class="modal-icon"><svg class="icon"><use href="#i-userplus"></use></svg></div><div class="eyebrow">LET'S CONNECT</div><h2 id="modalTitle">Create a new user</h2><p>Add someone to your local chat simulator.</p><form id="registrationForm"><label for="newUserId">User ID</label><input id="newUserId" name="id" maxlength="32" placeholder="e.g. U101" required/><label for="newUserName">Display name</label><input id="newUserName" name="name" maxlength="60" placeholder="e.g. Riya" required/><button type="submit" class="gradient-button modal-submit" id="registerBtn">Create user <span>→</span></button></form></section></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+</body>
+</html>
