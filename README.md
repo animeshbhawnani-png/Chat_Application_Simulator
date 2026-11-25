@@ -7,7 +7,7 @@ Note: VibeChat is an educational, local-only simulator. It is not affiliated wit
 📄 Project Report & PPT Submission
 The project documentation and presentation are available through Google Drive:
 - Project Report & Presentation:https://drive.google.com/drive/folders/1GPxCMlihcKomJ6VsGWsHboxQweUtLQDG?usp=sharing 
-Before publishing: Replace both placeholder URLs with your actual Google Drive sharing links. Set access to Anyone with the link → Viewer if your evaluator should be able to open them without requesting access.
+
 
 Features
 - Register users with unique IDs and search for them.
